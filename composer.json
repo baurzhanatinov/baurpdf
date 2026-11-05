@@ -1,5 +1,5 @@
 {
-    "name": "baur/pdf",
+    "name": "baurzhanatinov/baurpdf",
     "description": "Beautiful HTML → PDF in pure PHP: modern CSS (flex, grid), tables, native charts, TOC, bookmarks, Cyrillic fonts, presentations. Zero system dependencies.",
     "type": "library",
     "license": "MIT",
