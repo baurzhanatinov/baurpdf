@@ -12,7 +12,7 @@ use BaurPDF\Exception\BaurPdfException;
  */
 final class BaurPDF
 {
-    public const VERSION = '2.36.1';
+    public const VERSION = '2.36.2';
 
     private Options $o;
     private string $html = '';
