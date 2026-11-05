@@ -1,0 +1,7 @@
+/vendor/
+/.phpunit.cache/
+/tools/compare/out/
+
+/examples/output/
+/tools/compare/out/
+

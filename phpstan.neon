@@ -1,0 +1,10 @@
+parameters:
+    level: max
+    paths:
+        - src
+    scanFiles:
+        - tools/phpstan/yii.stub
+    ignoreErrors:
+        # Внутренние структуры (ops, атомы, стили) — однородные ассоциативные массивы;
+        # подробные array-shape для каждого параметра не дают пользы, поэтому только этот идентификатор.
+        - identifier: missingType.iterableValue

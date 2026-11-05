@@ -1,0 +1,7 @@
+/tests export-ignore
+/tools export-ignore
+/examples export-ignore
+/phpunit.xml export-ignore
+/phpstan.neon export-ignore
+/.gitattributes export-ignore
+* text=auto eol=lf

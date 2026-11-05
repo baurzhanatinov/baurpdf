@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+require dirname(__DIR__, 2) . '/src/Layout/ResourceLoader.php';
+$fail = 0; $pass = 0;
+function check(bool $ok, string $message): void { global $fail, $pass; if ($ok) { $pass++; echo "PASS $message\n"; } else { $fail++; echo "FAIL $message\n"; } }
+use BaurPDF\Layout\ResourceLoader;
+$r = new ResourceLoader(maxBytes: 8);
+check($r->load('data:text/plain;base64,QUJD') === 'ABC', 'valid base64');
+check($r->load('data:text/plain;base64,QUJD=') === null, 'reject surplus padding');
+check($r->load('data:text/plain;base64,QR==') === null, 'reject noncanonical pad bits');
+check($r->load('data:text/plain;base64,QUJD====') === null, 'reject excessive padding');
+check($r->load('data:text/plain,ABC%20D') === 'ABC D', 'valid percent encoded data');
+check($r->load('data:text/plain,ABC%GG') === null, 'reject malformed percent escape');
+check($r->load('data:text/plain,123456789') === null, 'limit decoded data');
+check($r->load('data:text/plain;base64,MTIzNDU2Nzg5') === null, 'limit base64 decoded data');
+check($r->load('php://filter/resource=/etc/passwd') === null, 'reject PHP stream wrapper');
+check($r->load('http://example.com/test') === null, 'remote blocked by default');
+$dir = sys_get_temp_dir() . '/baurpdf_cycle5_' . getmypid(); mkdir($dir);
+file_put_contents($dir . '/a?b.txt', 'yes');
+$local = new ResourceLoader(baseDir: $dir, maxBytes: 8);
+check($local->load('a?b.txt') === 'yes', 'literal question mark in local filename');
+file_put_contents($dir . '/a?b.txt', 'new');
+check($local->load('a?b.txt') === 'new', 'local file changes visible');
+check($local->load('file://evil.example/etc/passwd') === null, 'reject remote file authority');
+unlink($dir . '/a?b.txt'); rmdir($dir);
+require dirname(__DIR__, 2) . '/src/Layout/TableLayout.php';
+$table = (new ReflectionClass(BaurPDF\Layout\TableLayout::class))->newInstanceWithoutConstructor();
+$method = new ReflectionMethod(BaurPDF\Layout\TableLayout::class, 'distribute');
+$widths = $method->invoke($table, [0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [null, null, null], 100.0, true);
+check(count($widths) === 3 && min($widths) > 0 && abs(array_sum($widths) - 100) < 0.01, 'empty table columns get finite positive widths');
+$widths = $method->invoke($table, [12.0, 12.0], [0.0, 2.0], [null, null], 100.0, false);
+check(min($widths) >= 12.0, 'maximum width never falls below minimum');
+echo "RESULT $pass passed, $fail failed\n";
+exit($fail ? 1 : 0);

@@ -1,0 +1,25 @@
+<?php
+// Минимальные заглушки Yii2 для статического анализа (сам Yii не является зависимостью BaurPDF).
+namespace yii\base {
+    class BaseObject { public function init(): void {} }
+    class Component extends BaseObject {}
+    class Controller { public function renderPartial(string $view, array $params = []): string { return ''; } }
+    class View { public function render(string $view, array $params = [], ?object $context = null): string { return ''; } }
+    class Application {
+        public ?Controller $controller = null;
+        public View $view;
+        public function has(string $id): bool { return true; }
+        public function getResponse(): \yii\web\Response { return new \yii\web\Response(); }
+    }
+}
+namespace yii\web {
+    class HeaderCollection { public function set(string $name, string $value = ''): static { return $this; } }
+    class Response { public string $format = 'html'; public mixed $content = null; public function getHeaders(): HeaderCollection { return new HeaderCollection(); } }
+}
+namespace {
+    class Yii {
+        /** @var \yii\base\Application|null */
+        public static $app;
+        public static function getAlias(string $alias, bool $throwException = true): string|false { return $alias; }
+    }
+}

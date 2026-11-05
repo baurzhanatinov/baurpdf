@@ -1,0 +1,56 @@
+/* BaurPDF default theme */
+:root { --bp-primary: #4F46E5; --bp-accent: #06B6D4; --bp-text: #1F2937; --bp-muted: #6B7280; --bp-border: #E5E7EB; --bp-soft: #F8FAFC; --bp-success: #10B981; --bp-danger: #EF4444; --bp-warning: #F59E0B; }
+body { margin: 0; font-family: "PT Sans", sans-serif; font-size: 10.5pt; line-height: 1.45; color: var(--bp-text); }
+h1, h2, h3, h4, h5, h6 { color: #111827; line-height: 1.2; font-weight: bold; }
+h1 { font-size: 22pt; margin: 0 0 10pt; } h2 { font-size: 15pt; margin: 18pt 0 8pt; } h3 { font-size: 12.5pt; margin: 14pt 0 6pt; } h4 { font-size: 11pt; margin: 12pt 0 4pt; }
+p { margin: 0 0 8pt; } ul, ol { margin: 0 0 8pt; padding-left: 18pt; } li { margin-bottom: 2pt; }
+a { color: var(--bp-primary); text-decoration: none; }
+small, .bp-muted { color: var(--bp-muted); }
+code, pre, kbd { font-family: "PT Mono", monospace; font-size: 9pt; }
+code { background: #F1F5F9; padding: 0 2pt; border-radius: 2pt; }
+pre { background: #0F172A; color: #E2E8F0; padding: 8pt 10pt; border-radius: 4pt; white-space: pre-wrap; }
+blockquote { margin: 8pt 0; padding: 6pt 12pt; border-left: 3pt solid var(--bp-primary); background: var(--bp-soft); color: #374151; }
+hr { border: 0; border-top: 0.75pt solid var(--bp-border); margin: 12pt 0; }
+img { max-width: 100%; }
+table { border-collapse: collapse; width: 100%; margin: 0 0 10pt; font-size: 9.5pt; }
+th, td { padding: 5pt 7pt; text-align: left; vertical-align: top; hyphens: auto; border-bottom: 0.75pt solid var(--bp-border); }
+th { background: #F1F5F9; color: #374151; font-weight: bold; border-bottom: 1pt solid #CBD5E1; }
+table.bp-striped tbody tr:nth-child(even) td { background: #F8FAFC; }
+table.bp-bordered td, table.bp-bordered th { border: 0.75pt solid var(--bp-border); }
+.bp-num { text-align: right; white-space: nowrap; }
+tfoot td { font-weight: bold; border-top: 1pt solid #CBD5E1; border-bottom: 0; }
+chart, .bp-chart { display: block; width: 100%; height: 220pt; margin: 6pt 0 12pt; }
+.bp-text-center { text-align: center } .bp-text-right { text-align: right } .bp-bold { font-weight: bold }
+.bp-row { display: flex; gap: 12pt; } .bp-col { flex: 1; }
+.bp-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12pt } .bp-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12pt } .bp-grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10pt }
+.bp-card { border: 0.75pt solid var(--bp-border); border-radius: 6pt; padding: 10pt 12pt; background: #fff; margin-bottom: 10pt; break-inside: avoid; }
+.bp-kpi { border-radius: 6pt; padding: 10pt 12pt; background: var(--bp-soft); border: 0.75pt solid var(--bp-border); break-inside: avoid; }
+.bp-kpi-label { font-size: 8pt; color: var(--bp-muted); text-transform: uppercase; letter-spacing: 0.5pt; }
+.bp-kpi-value { white-space: nowrap; font-size: 20pt; font-weight: bold; color: #111827; line-height: 1.15; }
+.bp-kpi-delta { font-size: 8.5pt; } .bp-up { color: var(--bp-success) } .bp-down { color: var(--bp-danger) }
+.bp-badge { display: inline-block; padding: 1pt 6pt; border-radius: 8pt; font-size: 8pt; font-weight: bold; background: #EEF2FF; color: var(--bp-primary); }
+.bp-badge.success { background: #D1FAE5; color: #047857 } .bp-badge.danger { background: #FEE2E2; color: #B91C1C } .bp-badge.warning { background: #FEF3C7; color: #B45309 }
+.bp-alert { padding: 8pt 12pt; border-radius: 4pt; background: #EFF6FF; border-left: 3pt solid #3B82F6; margin-bottom: 10pt; }
+.bp-cover { background: linear-gradient(135deg, #4F46E5, #06B6D4); color: #fff; padding: 28pt 26pt; border-radius: 8pt; margin-bottom: 16pt; }
+.bp-cover h1 { color: #fff; font-size: 26pt; margin: 0 0 6pt } .bp-cover p { color: #E0E7FF; margin: 0 }
+.bp-header { font-size: 8pt; color: #9CA3AF; } .bp-footer { font-size: 8pt; color: #9CA3AF; }
+pagebreak, .page-break { break-before: page; }
+/* TOC */
+.bp-toc { margin-bottom: 14pt; }
+.bp-toc-title { font-size: 16pt; font-weight: bold; margin-bottom: 8pt; color: #111827; }
+.bp-toc-item { display: flex; color: var(--bp-text); padding: 2.5pt 0; text-decoration: none; }
+.bp-toc-text { } .bp-toc-dots { flex: 1; border-bottom: 0.75pt dotted #CBD5E1; margin: 0 4pt 3pt; } .bp-toc-page { color: var(--bp-muted); }
+.bp-toc-l1 { font-weight: bold; } .bp-toc-l2 { padding-left: 12pt; } .bp-toc-l3 { padding-left: 24pt; font-size: 9.5pt; } .bp-toc-l4 { padding-left: 36pt; font-size: 9pt; }
+/* Slides */
+.slide { box-sizing: border-box; padding: 36pt 44pt; position: relative; background: #fff; }
+.slide { padding: 48pt 64pt; font-size: 20pt; }
+.slide h1 { font-size: 48pt; margin-bottom: 16pt } .slide h2 { font-size: 36pt; margin: 0 0 22pt; color: #111827 } .slide p, .slide li { font-size: 20pt; line-height: 1.4 } .slide li { margin-bottom: 10pt }
+.slide h2::after { content: none }
+.slide.dark { background: #0F172A; color: #E2E8F0 } .slide.dark h1, .slide.dark h2 { color: #fff } .slide.dark .lead, .slide.dark p { color: #A5B4FC }
+.slide.title { background: linear-gradient(135deg, #312E81, #4F46E5 55%, #06B6D4); color: #fff; padding-top: 140pt; }
+.slide.title { padding-top: 170pt } .slide.title h1 { color: #fff; font-size: 60pt } .slide.title p { color: #C7D2FE; font-size: 22pt }
+.slide chart { height: 300pt; }
+/* Invoice */
+.bp-invoice-head { display: flex; justify-content: space-between; margin-bottom: 18pt; }
+.bp-invoice-title { font-size: 24pt; font-weight: bold; color: var(--bp-primary); }
+.bp-total { font-size: 14pt; font-weight: bold; }

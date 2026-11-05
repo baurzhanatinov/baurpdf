@@ -1,0 +1,6 @@
+Hyphenation patterns from the hyph-utf8 project (https://github.com/hyphenation/tex-hyphen):
+- ru.pat.txt — Russian, (C) 1999-2003 Alexander I. Lebedev; LaTeX Project Public License (LPPL) 1.3.
+- en.pat.txt, en.hyp.txt — US English, (C) 1990, 2004, 2005 Gerard D.C. Kuiken; copying and distribution
+  permitted in any medium without royalty provided the copyright notice and this notice are preserved.
+- kk.pat.txt — Kazakh, (C) 2010 Mojca Miklavec, 2025 Robert Ermers, 2026 Arthur Rosendahl; public domain.
+Patterns are distributed unmodified.

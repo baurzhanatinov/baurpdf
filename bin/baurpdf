@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+// baurpdf input.html output.pdf [--format=A4] [--landscape] [--toc] [--footer="Стр. {PAGENO} из {nbpg}"] [--watermark=DRAFT] [--password=x] [--presentation]
+foreach ([__DIR__ . '/../vendor/autoload.php', __DIR__ . '/../../../autoload.php'] as $a) if (is_file($a)) { require $a; break; }
+use BaurPDF\BaurPDF;
+$args = array_slice($argv, 1); $pos = []; $opt = [];
+foreach ($args as $a) { if (str_starts_with($a, '--')) { [$k, $v] = array_pad(explode('=', substr($a, 2), 2), 2, true); $opt[$k] = $v; } else $pos[] = $a; }
+if (count($pos) < 2 || isset($opt['help'])) { fwrite(STDERR, "Usage: baurpdf input.html|- output.pdf [--format=A4] [--landscape] [--toc] [--footer=...] [--header=...] [--watermark=TEXT] [--password=X] [--presentation] [--allow-remote]\n"); exit(1); }
+try {
+    $m = $pos[0] === '-' ? BaurPDF::html(stream_get_contents(STDIN)) : BaurPDF::fromFile($pos[0]);
+    if (isset($opt['format'])) $m->format($opt['format']);
+    if (isset($opt['landscape'])) $m->landscape();
+    if (isset($opt['toc'])) $m->toc();
+    if (isset($opt['header'])) $m->header($opt['header']);
+    if (isset($opt['footer'])) $m->footer($opt['footer']);
+    if (isset($opt['watermark'])) $m->watermark($opt['watermark']);
+    if (isset($opt['password'])) $m->password($opt['password']);
+    if (isset($opt['presentation'])) $m->presentation();
+    if (isset($opt['allow-remote'])) $m->allowRemote();
+    $t = microtime(true); $m->save($pos[1]);
+    $d = $m->render();
+    fprintf(STDERR, "%s: %d pages, %.1f KB, %.2fs\n", $pos[1], $d->pageCount(), $d->size() / 1024, microtime(true) - $t);
+    foreach ($m->warnings() as $w) fwrite(STDERR, "warning: $w\n");
+} catch (\Throwable $e) { fwrite(STDERR, 'error: ' . $e->getMessage() . "\n"); exit(2); }
